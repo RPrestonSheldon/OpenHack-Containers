@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripinsights/user-java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripinsights/user-java
+  template:
+    metadata:
+      labels:
+        app: tripinsights/user-java
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: tripinsights/poi
+        image: registryojv0697.azurecr.io/tripinsights/user-java:1.0
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 6379
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripinsights/poi
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: tripinsights/poi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripinsights/poi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripinsights/poi
+  template:
+    metadata:
+      labels:
+        app: tripinsights/poi
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: tripinsights/poi
+        image: registryojv0697.azurecr.io/tripinsights/poi:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 80
+        env:
+        - name: REDIS
+          value: "tripinsights/poi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripinsights/poi
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: tripinsights/poi
