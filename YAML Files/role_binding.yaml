@@ -25,3 +25,33 @@ subjects:
 - kind: Group
   namespace: api
   name: 9e74b24f-b170-4f1a-8e14-e186d2fd964b
+  
+ ---
+  kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: api-team-api-read
+  namespace: api
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: api-read
+subjects:
+- kind: Group
+  namespace: api
+  name: 74c7a013-0999-44e1-8916-a76758252d53
+  
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: api-team-web-full
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-full
+subjects:
+- kind: Group
+  namespace: web
+  name: 74c7a013-0999-44e1-8916-a76758252d53
