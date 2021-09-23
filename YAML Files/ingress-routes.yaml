@@ -25,14 +25,14 @@ spec:
             name: trips
             port:
               number: 80
-  - path: /api/user-java(/|$)(.*)
+      - path: /api/user-java(/|$)(.*)
         pathType: Prefix
         backend:
           service:
             name: user-java
             port:
               number: 80
-  - path: /api/user(/|$)(.*)
+      - path: /api/user(/|$)(.*)
         pathType: Prefix
         backend:
           service:
