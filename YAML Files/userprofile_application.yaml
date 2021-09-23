@@ -18,29 +18,10 @@ spec:
       containers:
       - name: userprofile
         image: registryojv0697.azurecr.io/tripinsights/userprofile:latest
-        env:
-        - name: ALLOW_EMPTY_PASSWORD
-          value: "yes"
-        - name: SQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_USER
-        - name: SQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_PASSWORD
-        - name: SQL_SERVER
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_SERVER
-        - name: SQL_DBNAME
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_DBNAME    
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
         resources:
           requests:
             cpu: 100m
@@ -51,7 +32,13 @@ spec:
         ports:
         - containerPort: 80
           name: userprofile
-
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "tripinsightskvoh"
 ---
 apiVersion: v1
 kind: Service
