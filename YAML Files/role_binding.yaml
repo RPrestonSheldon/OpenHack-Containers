@@ -26,7 +26,7 @@ subjects:
   namespace: api
   name: 9e74b24f-b170-4f1a-8e14-e186d2fd964b  
 ---
-  kind: RoleBinding
+kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: api-team-api-read
