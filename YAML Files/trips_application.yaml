@@ -39,6 +39,8 @@ spec:
           readOnly: true
           volumeAttributes:
             secretProviderClass: "tripinsightskvoh"
+          nodePublishSecretRef:
+            name: secrets-store-creds
 ---
 apiVersion: v1
 kind: Service
