@@ -22,9 +22,9 @@ spec:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
         - name: USERPROFILE_API_ENDPOINT
-          value: http://userprofile
+          value: http://userprofile.api
         - name: TRIPS_API_ENDPOINT
-          value: http://trips                      
+          value: http://trips.api                      
         resources:
           requests:
             cpu: 100m
