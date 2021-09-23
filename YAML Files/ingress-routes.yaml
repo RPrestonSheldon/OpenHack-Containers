@@ -16,6 +16,7 @@ spec:
         backend:
           service:
             name: poi
+            namespace: api
             port:
               number: 80
       - path: /api/trips(/|$)(.*)
@@ -23,6 +24,7 @@ spec:
         backend:
           service:
             name: trips
+            namespace: api
             port:
               number: 80
       - path: /api/user-java(/|$)(.*)
@@ -30,6 +32,7 @@ spec:
         backend:
           service:
             name: user-java
+            namespace: api
             port:
               number: 80
       - path: /api/user(/|$)(.*)
@@ -37,6 +40,7 @@ spec:
         backend:
           service:
             name: userprofile
+            namespace: api
             port:
               number: 80
       - path: /(.*)
@@ -44,5 +48,6 @@ spec:
         backend:
           service:
             name: tripviewer
+            namespace: web
             port:
               number: 80
