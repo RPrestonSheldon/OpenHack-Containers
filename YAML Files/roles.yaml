@@ -1,7 +1,7 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: api-user
+  name: api-full
   namespace: api
 rules:
 - apiGroups: ["", "extensions", "apps"]
@@ -16,7 +16,7 @@ rules:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: web-user
+  name: web-full
   namespace: web
 rules:
 - apiGroups: ["", "extensions", "apps"]
@@ -31,7 +31,7 @@ rules:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: web-user
+  name: api-read
   namespace: api
 rules:
 - apiGroups: ["", "extensions", "apps"]
@@ -46,7 +46,7 @@ rules:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: api-user
+  name: web-read
   namespace: web
 rules:
 - apiGroups: ["", "extensions", "apps"]
