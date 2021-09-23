@@ -18,29 +18,17 @@ spec:
       containers:
       - name: trips
         image: registryojv0697.azurecr.io/trips:latest
-        env:
-        - name: ALLOW_EMPTY_PASSWORD
-          value: "yes"
-        - name: SQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_USER
-        - name: SQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_PASSWORD
-        - name: SQL_SERVER
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_SERVER
-        - name: SQL_DBNAME
-          valueFrom:
-            secretKeyRef:
-              name: sqlsecret
-              key: SQL_DBNAME                        
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "tripinsightskvoh"
         resources:
           requests:
             cpu: 100m
