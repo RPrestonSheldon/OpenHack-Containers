@@ -16,6 +16,5 @@ spec:
         backend:
           service:
             name: tripviewer
-            namespace: web
             port:
               number: 80
