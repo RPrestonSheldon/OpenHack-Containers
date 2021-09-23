@@ -1,0 +1,59 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sre-user-api-full
+  namespace: api
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
+  
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sre-user-web-full
+  namespace: web
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
+  
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sre-user-api-read
+  namespace: api
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sre-user-web-read
+  namespace: web
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
