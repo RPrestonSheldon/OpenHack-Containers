@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: poi
   namespace: api
- 
 spec:
   replicas: 1
   selector:
@@ -41,6 +40,7 @@ metadata:
   name: poi
 spec:
   type: ClusterIP
+  namespace: api
   ports:
   - port: 80
   selector:
